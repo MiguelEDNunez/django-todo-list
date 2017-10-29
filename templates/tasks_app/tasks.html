@@ -1,0 +1,35 @@
+<h1>Welcome the the tasks page</h1>
+
+<form method="POST">
+    {{ form.as_p }}
+    {% csrf_token %}
+    <input type="submit" value="Add new task">
+</form>
+
+{% if tasks %}
+
+    <h2>Your todo list</h2>
+    <ol>
+    {% for task in tasks %}
+        {% if task.complete == False %}
+        <li>Task description: {{ task.name }}
+            <input type="button" value="Complete"> <!-- inserir form -->
+        </li>
+        {% endif %}
+    {% endfor %}
+    </ol>
+
+    <h2>Your completed tasks</h2>
+    <ol>
+    {% for task in tasks %}
+        {% if task.complete == True %}
+        <li>
+            TaskDescription: {{ task.name }}
+        </li>
+        {% endif %}
+    {% endfor %}
+    </ol>
+
+{% endif %}
+
+
