@@ -22,12 +22,13 @@ def task_list(request):
             new_task = new_form.save(commit=False)
             new_task.author = request.user
             new_form.save()
-            return render(request, 'tasks_app/task_list.html', {'new_form': new_form, 'edit_form': edit_form,
+            return render(request, 'tasks_app/task_list.html', {'new_form': new_form,
                                                                 'tasks': tasks})
     else:
         new_form = NewTaskForm(prefix="new")
         edit_form = EditTaskForm(prefix="edit")
-    return render(request, 'tasks_app/task_list.html', {'new_form': new_form, 'edit_form': edit_form, 'tasks': tasks})
+    return render(request, 'tasks_app/task_list.html', {'new_form': new_form,
+                                                        'tasks': tasks})
 
 
 @login_required

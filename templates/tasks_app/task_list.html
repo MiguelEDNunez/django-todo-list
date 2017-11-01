@@ -19,7 +19,7 @@
             {% for task in tasks %}
 
                 {% if task.complete == False and task.author == user %} <!--  & task.author == User.auth -->
-                    <li>Task: Author - {{ task.author }} </li>
+{#                    <li>Task: Author - {{ task.author }} </li>#}
                     <form action="{% url 'task_edit' pk=task.pk %}" method="POST">
                         <li>
                             Task description: {{ task.name }}
