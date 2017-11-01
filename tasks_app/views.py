@@ -2,6 +2,8 @@ from django.shortcuts import get_object_or_404, redirect, render
 from tasks_app.forms import NewTaskForm, EditTaskForm
 from tasks_app.models import Task
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login, authenticate
 
 # Create your views here.
 
@@ -42,3 +44,18 @@ def task_edit(request, pk):
     # else:
         # edit_form = EditTaskForm(instance=edit_form)
     return redirect('task_list')
+
+
+def signup(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_date.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('index')
+    else:
+        form = UserCreationForm()
+    return render(request, 'registration/signup.html', {'form': form})

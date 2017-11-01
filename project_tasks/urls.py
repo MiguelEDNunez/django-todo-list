@@ -16,11 +16,13 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from django.contrib.auth import views
+from tasks_app import views as app_views
 
 urlpatterns = [
-    # url(r'^$', views.index, name='index'),
+    url(r'^$', app_views.index, name='index'),
     url(r'^admin/', admin.site.urls),
+    url(r'^tasks/', include('tasks_app.urls')),
+    url(r'^signup/$', app_views.signup, name='signup'),
     url(r'^accounts/login/$', views.login, name='login'),
     url(r'^accounts/logout/$', views.logout, name='logout', kwargs={'next_page': '/'}),
-    url(r'', include('tasks_app.urls')),
 ]
