@@ -1,6 +1,7 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from tasks_app.forms import NewTaskForm, EditTaskForm
 from tasks_app.models import Task
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -9,14 +10,7 @@ def index(request):
     return render(request, 'tasks_app/index.html')
 
 
-def login(request):
-    return render(request, 'tasks_app/login.html')
-
-
-def register(request):
-    return render(request, 'tasks_app/register.html')
-
-
+@login_required
 def task_list(request):
     tasks = Task.objects.order_by("id")
     if request.method == 'POST':
@@ -32,6 +26,7 @@ def task_list(request):
     return render(request, 'tasks_app/task_list.html', {'new_form': new_form, 'edit_form': edit_form, 'tasks': tasks})
 
 
+@login_required
 def task_edit(request, pk):
     # tasks = Task.objects.order_by("id")
     # new_form = NewTaskForm()

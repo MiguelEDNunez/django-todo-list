@@ -31,8 +31,14 @@
                     <li><a href="{% url 'index' %}">Index</a></li>
                   </ul>
                   <ul class="nav navbar-nav navbar-right">
+                      {% if user.is_authenticated %}
+                          <li><a href="">Hello {{ user.username }}</a></li>
+                          <li><a href="{% url 'logout' %}">Logout</a></li>
+{#                          <li><a href=""><small>(<a href="{% url 'logout' %}">Log out</a>)</small></a></li>#}
+                      {% else %}
                     <li><a href="{% url 'login' %}">Login</a></li>
-                    <li><a href="{% url 'register' %}">Sign Up</a></li>
+                    <li><a href="{% url 'logout' %}">Sign Up</a></li>
+                      {% endif %}
                   </ul>
                 </div><!-- /.navbar-collapse -->
               </div><!-- /.container-fluid -->
