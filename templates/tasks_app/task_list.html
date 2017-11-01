@@ -18,6 +18,14 @@
             <ol>
             {% for task in tasks %}
                 {% if task.complete == False %}
+{#                {% if task.autor == user %}#}
+{#                {% if task.complete == False and task.autor == User %} <!--  & task.author == User.auth -->#}
+{#                    {{ user }}#}
+{#                    {{ user.auth }}#}
+{#                    {{ user.name }}#}
+                    {{ user.id }}
+{#                    <li>Task: Author - {{ task.author }} - {{ User.username }}</li>#}
+                    <li>Task: Author - {{ task.author }} </li>
                     <form action="{% url 'task_edit' pk=task.pk %}" method="POST">
                         <li>
                             Task description: {{ task.name }}
@@ -39,7 +47,7 @@
             <h2>Your completed tasks</h2>
             <ol>
             {% for task in tasks %}
-                {% if task.complete == True %}
+                {% if task.complete == True and task.autor == User %}
                 <li style="text-decoration: line-through">
                     TaskDescription: {{ task.name }}
                 </li>

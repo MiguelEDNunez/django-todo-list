@@ -19,6 +19,8 @@ def task_list(request):
         new_form = NewTaskForm(request.POST, prefix="new")
         edit_form = EditTaskForm(request.POST, prefix="edit")
         if new_form.is_valid():
+            new_task = new_form.save(commit=False)
+            new_task.author = request.user
             new_form.save()
             return render(request, 'tasks_app/task_list.html', {'new_form': new_form, 'edit_form': edit_form,
                                                                 'tasks': tasks})
