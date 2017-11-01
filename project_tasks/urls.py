@@ -22,7 +22,7 @@ urlpatterns = [
     url(r'^$', app_views.index, name='index'),
     url(r'^admin/', admin.site.urls),
     url(r'^tasks/', include('tasks_app.urls')),
-    url(r'^signup/$', app_views.signup, name='signup'),
+    url(r'^register/$', app_views.signup, name='register'),
     url(r'^accounts/login/$', views.login, name='login'),
     url(r'^accounts/logout/$', views.logout, name='logout', kwargs={'next_page': '/'}),
 ]
