@@ -18,7 +18,7 @@ from django.contrib import admin
 from tasks_app import views
 
 urlpatterns = [
-    url(r'^$', views.index, name="index"),
-    url(r'^tasks/', include('tasks_app.urls')),
+    url(r'^$', views.index, name='index'),
     url(r'^admin/', admin.site.urls),
+    url(r'^tasks/', include('tasks_app.urls')),
 ]
