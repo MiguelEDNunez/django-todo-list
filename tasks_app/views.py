@@ -33,8 +33,8 @@ def task_list(request):
 
 
 def task_edit(request, pk):
-    tasks = Task.objects.order_by("id")
-    new_form = NewTaskForm()
+    # tasks = Task.objects.order_by("id")
+    # new_form = NewTaskForm()
     edit_form = get_object_or_404(Task, pk=pk)
     if request.method == "POST":
         edit_form = EditTaskForm(request.POST, instance=edit_form)
@@ -44,6 +44,6 @@ def task_edit(request, pk):
             task.complete = True
             task.save()
             return redirect('task_list')
-    else:
-        edit_form = EditTaskForm(instance=edit_form)
+    # else:
+        # edit_form = EditTaskForm(instance=edit_form)
     return redirect('task_list')

@@ -3,45 +3,51 @@
 
     <div class="container">
         <div class="jumbotron">
-
+            <h1>Welcome to the Task Page</h1>
+            <p></p>
             <form method="POST">
                 {{ new_form.as_p }}
                 {% csrf_token %}
                 <input type="submit" value="Add new task">
             </form>
 
-            {% if tasks %}
-
-                <h2>Your todo list</h2>
-                <ol>
-                {% for task in tasks %}
-                    {% if task.complete == False %}
-                        <form action="{% url 'task_edit' pk=task.pk %}" method="POST">
-                            <li>
-                                Task description: {{ task.name }}
-                                {{ edit_form.as_p }}
-                                {% csrf_token %}
-                                <a href="{%  url 'task_edit' pk=task.pk %}"><button type="submit" value="Complete">Edit</button></a>
-                            </li>
-                        </form>
-                    {% endif %}
-                {% endfor %}
-                </ol>
-
-                <h2>Your completed tasks</h2>
-                <ol>
-                {% for task in tasks %}
-                    {% if task.complete == True %}
-                    <li style="text-decoration: line-through">
-                        TaskDescription: {{ task.name }}
-                    </li>
-                    {% endif %}
-                {% endfor %}
-                </ol>
-
-            {% endif %}
-
         </div>
+        {% if tasks %}
+
+            <h2>Your todo list</h2>
+            <ol>
+            {% for task in tasks %}
+                {% if task.complete == False %}
+                    <form action="{% url 'task_edit' pk=task.pk %}" method="POST">
+                        <li>
+                            Task description: {{ task.name }}
+                            {{ edit_form.as_p }}
+                            {% csrf_token %}
+                            <a href="{%  url 'task_edit' pk=task.pk %}">
+                                <button type="submit" value="Complete">
+                                    Complete
+                                </button>
+                            </a>
+                        </li>
+                    </form>
+                {% endif %}
+            {% endfor %}
+            </ol>
+
+            <hr>
+
+            <h2>Your completed tasks</h2>
+            <ol>
+            {% for task in tasks %}
+                {% if task.complete == True %}
+                <li style="text-decoration: line-through">
+                    TaskDescription: {{ task.name }}
+                </li>
+                {% endif %}
+            {% endfor %}
+            </ol>
+
+        {% endif %}
     </div>
 
 {% endblock %}
