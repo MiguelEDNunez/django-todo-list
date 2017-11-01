@@ -17,14 +17,8 @@
             <h2>Your todo list</h2>
             <ol>
             {% for task in tasks %}
-                {% if task.complete == False %}
-{#                {% if task.autor == user %}#}
-{#                {% if task.complete == False and task.autor == User %} <!--  & task.author == User.auth -->#}
-{#                    {{ user }}#}
-{#                    {{ user.auth }}#}
-{#                    {{ user.name }}#}
-{#                    {{ user.id }}#}
-{#                    <li>Task: Author - {{ task.author }} - {{ User.username }}</li>#}
+
+                {% if task.complete == False and task.author == user %} <!--  & task.author == User.auth -->
                     <li>Task: Author - {{ task.author }} </li>
                     <form action="{% url 'task_edit' pk=task.pk %}" method="POST">
                         <li>
@@ -38,6 +32,7 @@
                             </a>
                         </li>
                     </form>
+{#                {% endifequal %}#}
                 {% endif %}
             {% endfor %}
             </ol>
@@ -47,7 +42,7 @@
             <h2>Your completed tasks</h2>
             <ol>
             {% for task in tasks %}
-                {% if task.complete == True and task.autor == User %}
+                {% if task.complete == True and task.author == user %}
                 <li style="text-decoration: line-through">
                     TaskDescription: {{ task.name }}
                 </li>
