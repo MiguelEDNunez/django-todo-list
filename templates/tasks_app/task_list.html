@@ -12,20 +12,17 @@
             </form>
 
         </div>
-        {% if tasks %}
+        {% if tasks_complete or tasks_todo %}
 
             <h2>Your todo list</h2>
             <ol>
-            {% for task in tasks %}
-
-                {% if task.complete == False and task.author == user %} <!--  & task.author == User.auth -->
-{#                    <li>Task: Author - {{ task.author }} </li>#}
-                    <form action="{% url 'task_edit' pk=task.pk %}" method="POST">
+            {% for task_todo in tasks_todo %}
+                    <form action="{% url 'task_edit' pk=task_todo.pk %}" method="POST">
                         <li>
-                            Task description: {{ task.name }}
+                            Task description: {{ task_todo.name }}
                             {{ edit_form.as_p }}
                             {% csrf_token %}
-                            <a href="{%  url 'task_edit' pk=task.pk %}">
+{#                            <a href="{%  url 'task_edit' pk=task_todo.pk %}">#}
                                 <button type="submit" value="Complete">
                                     Complete
                                 </button>
@@ -33,7 +30,6 @@
                         </li>
                     </form>
 {#                {% endifequal %}#}
-                {% endif %}
             {% endfor %}
             </ol>
 
@@ -41,12 +37,10 @@
 
             <h2>Your completed tasks</h2>
             <ol>
-            {% for task in tasks %}
-                {% if task.complete == True and task.author == user %}
+            {% for task_complete in tasks_complete %}
                 <li style="text-decoration: line-through">
-                    TaskDescription: {{ task.name }}
+                    TaskDescription: {{ task_complete.name }}
                 </li>
-                {% endif %}
             {% endfor %}
             </ol>
 

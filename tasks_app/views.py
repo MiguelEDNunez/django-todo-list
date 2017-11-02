@@ -14,7 +14,10 @@ def index(request):
 
 @login_required
 def task_list(request):
-    tasks = Task.objects.order_by("id")
+    tasks = Task.objects.filter(author=request.user).order_by("id")
+    tasks_complete = tasks.filter(complete=True).order_by("id")
+    tasks_todo = tasks.filter(complete=False)
+
     if request.method == 'POST':
         new_form = NewTaskForm(request.POST, prefix="new")
         edit_form = EditTaskForm(request.POST, prefix="edit")
@@ -23,12 +26,16 @@ def task_list(request):
             new_task.author = request.user
             new_form.save()
             return render(request, 'tasks_app/task_list.html', {'new_form': new_form,
-                                                                'tasks': tasks})
+                                                                # 'edit_form': edit_form,
+                                                                'tasks_complete': tasks_complete,
+                                                                'tasks_todo': tasks_todo})
     else:
         new_form = NewTaskForm(prefix="new")
         edit_form = EditTaskForm(prefix="edit")
     return render(request, 'tasks_app/task_list.html', {'new_form': new_form,
-                                                        'tasks': tasks})
+                                                        # 'edit_form': edit_form,
+                                                        'tasks_complete': tasks_complete,
+                                                        'tasks_todo': tasks_todo})
 
 
 @login_required
