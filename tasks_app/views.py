@@ -1,11 +1,10 @@
-from django.shortcuts import get_object_or_404, redirect, render
 from tasks_app.forms import NewTaskForm, EditTaskForm
 from tasks_app.models import Task
+
+from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, authenticate
-
-# Create your views here.
 
 
 def index(request):

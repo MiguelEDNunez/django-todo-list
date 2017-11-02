@@ -25,4 +25,6 @@ urlpatterns = [
     url(r'^register/$', app_views.signup, name='register'),
     url(r'^accounts/login/$', views.login, name='login'),
     url(r'^accounts/logout/$', views.logout, name='logout', kwargs={'next_page': '/'}),
+    # Added
+    url(r'^oauth/', include('social_django.urls', namespace='social')),  # <--
 ]

@@ -15,5 +15,9 @@
             <input type="submit" value="login" />
             <input type="hidden" name="next" value="{{ next }}" />
         </form>
+
+        <p><strong>-- OR --</strong></p>
+        <a href="{% url 'social:begin' 'github' %}"><i class="github icon"></i>Login with GitHub </a><br>
+        <a href="{% url 'social:begin' 'facebook' %}"><i class="facebook square icon"> </i>Login with Facebook</a>
     </div>
 {% endblock %}
